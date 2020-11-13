@@ -1,12 +1,14 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import ReduxLiteContext from "../components/ReduxLiteContext";
 
 const useSelector = (selector) => {
     const context = useContext(ReduxLiteContext);
     const { store } = context;
-    const state = store.getState();
+    const [nextState, setNextState] = useState(store.getState());
 
-    return selector(state);
+    store.subscribe((state) => setNextState(state));
+
+    return selector(nextState);
 };
 
 export default useSelector;

@@ -1,9 +1,11 @@
+import { increment, decrement } from "./actions";
+
 const rootReducer = (state, action) => {
     switch (action.type) {
-        case "INCREMENT":
-            return { ...state, counter: state.counter += action.payload };
-        case "DECREMENT":
-            return { ...state, counter: state.counter -= action.payload };
+        case increment().type:
+            return { ...state, counter: state.counter += 1};
+        case decrement().type:
+            return { ...state, counter: state.counter -= 1 };
         default:
             return state;
     }
